@@ -38,7 +38,7 @@ class Navigation(object):
     def setGoal(self, data):
         # distance is self-defined
         dist = 3 # m
-        desired_heading = self.heading + radians(int(data.data))
+        desired_heading = self.heading + radians(float(data.data))
         desired_x = self.x + dist*cos(desired_heading)
         desired_y = self.y + dist*sin(desired_heading)
 

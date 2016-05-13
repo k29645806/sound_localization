@@ -12,7 +12,7 @@
   </node>
 
   <!--For simulation-->
-  <include file="$(find robot)/launch/sim_robot.launch" />
+  <!--include file="$(find robot)/launch/sim_robot.launch" /-->
 
   <!--For implementation-->
   <!--include file="$(find robot)/launch/robot.launch" /-->
