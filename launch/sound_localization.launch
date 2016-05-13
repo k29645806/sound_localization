@@ -1,10 +1,20 @@
 <launch>
+  <!--Sound localization-->
   <node name="read_serial_data" pkg="sound_localization" type="read_serial_data.py"/>
   <node name="sound_localization" pkg="sound_localization" type="sound_localization.py"/>
   <node name="sendGoal" pkg="sound_localization" type="sendGoal.py"/>
 
-  <!--node name="recognizer" pkg="pocketsphinx" type="recognizer.py"/-->
 
+  <!--Voice recognition-->
+  <node name="recognizer" pkg="pocketsphinx" type="recognizer.py" output="screen">
+    <param name="lm" value="$(find sound_localization)/include/TAR5582/5582.lm"/>
+    <param name="dict" value="$(find sound_localization)/include/TAR5582/5582.dic"/>
+  </node>
+
+  <!--For simulation-->
   <include file="$(find robot)/launch/sim_robot.launch" />
+
+  <!--For implementation-->
+  <!--include file="$(find robot)/launch/robot.launch" /-->
 
 </launch>

@@ -8,7 +8,7 @@ class SoundLocalization(object):
     def __init__(self):
         rospy.init_node("sound_localization")
     	rospy.Subscriber('/serial/read', String, self.subSoundAngle)
-        rospy.Subscriber('/recognizer', String, self.handleCmd)
+        rospy.Subscriber('/recognizer/output', String, self.handleCmd)
         self._pubFinalAngle = rospy.Publisher('/finalAngle', String, queue_size=10)
         self._loopRate = 100
         self.rate = rospy.Rate(self._loopRate)
@@ -25,7 +25,7 @@ class SoundLocalization(object):
         self._receiveFlag = True
 
     def handleCmd(self, data):
-        if data.data == "come":
+        if data.data == "come here":
             self._receiveCmdFlag = True
 
     def recognizer(self,recognizeTime=0.2):

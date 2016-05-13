@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+import roslib
+roslib.load_manifest('sound_localization')
 import rospy
 from std_msgs.msg import String
 from nav_msgs.msg import Odometry
-from actionlib_msgs import GoalStatusArray
+from actionlib_msgs.msg import GoalStatusArray
 from geometry_msgs.msg import PoseStamped, Quaternion
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 from math import cos, sin, radians
@@ -10,6 +12,7 @@ from math import cos, sin, radians
 class Navigation(object):
 
     x, y, heading, v, w = 0.0, 0.0, 0.0, 0.0, 0.0
+    navInfo = "Start sendGoal waiting for command"
 
     def __init__(self):
         rospy.init_node('sendGoal')
@@ -53,12 +56,12 @@ class Navigation(object):
         self.status = data.status_list[0].status
 
     def printInfo(self):
-        rospy.logindo(self.navInfo)
+        rospy.loginfo(self.navInfo)
 
 if __name__ == '__main__':
     try:
         nav = Navigation()
-        rate = rospy.Rate(10.0)
+        rate = rospy.Rate(5.0)
         while not rospy.is_shutdown():
             nav.printInfo()
             rate.sleep()
