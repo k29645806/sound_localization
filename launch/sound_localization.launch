@@ -1,4 +1,10 @@
 <launch>
   <node name="read_serial_data" pkg="sound_localization" type="read_serial_data.py"/>
   <node name="sound_localization" pkg="sound_localization" type="sound_localization.py"/>
+  <node name="sendGoal" pkg="sound_localization" type="sendGoal.py"/>
+
+  <!--node name="recognizer" pkg="pocketsphinx" type="recognizer.py"/-->
+
+  <include file="$(find robot)/launch/sim_robot.launch" />
+
 </launch>
