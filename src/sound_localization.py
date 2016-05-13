@@ -46,7 +46,7 @@ class SoundLocalization(object):
 
     def pubResult(self):
         if self._receiveCmdFlag and self.finalSoundAngle:
-            self._pubFinalAngle.publish(self.finalSoundAngle)
+            self._pubFinalAngle.publish(str(self.finalSoundAngle))
             self._receiveCmdFlag = False
 
     def start(self):

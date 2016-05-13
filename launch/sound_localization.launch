@@ -1,0 +1,4 @@
+<launch>
+  <node name="read_serial_data" pkg="sound_localization" type="read_serial_data.py"/>
+  <node name="sound_localization" pkg="sound_localization" type="sound_localization.py"/>
+</launch>
