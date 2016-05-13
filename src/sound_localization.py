@@ -11,26 +11,27 @@ class SoundLocalization(object):
         self.loopRate = 100
         self.rate = rospy.Rate(self.loopRate)
         self._receivedAngle = None
-        self.finalSoundAngle = -1
+        self.finalSoundAngle = -1.0
+        self._counter = 0
+        self._angleList = []
 
     def subSoundAngle(self, data):
         #rospy.loginfo("Received angle: %s"%data.data)
-        self._receivedAngle = data.data
+        self._receivedAngle = int(data.data)
 
     def recognizer(self, angle, recognizeTime=0.2):
-        counter, angleList = 0, []
-        counter += 1
-        angleList.append(angle)
+        self._counter += 1
+        self._angleList.append(angle)
 
         # Reset
-        if counter > recognizeTime*self.loopRate:
-            counter, angleList = 0, []
+        if self._counter > recognizeTime*self.loopRate:
+            self._counter, self._angleList = 0, []
 
         # Calculate result
-        if len(angleList)<5:
-            self.finalSoundAngle = -1
+        if len(self._angleList)<5:
+            self.finalSoundAngle = -1.0
         else:
-            self.finalSoundAngle = median(angleList)
+            self.finalSoundAngle = median(self._angleList)
             rospy.loginfo("Final sound angle: %s"%self.finalSoundAngle)
 
 
